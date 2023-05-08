@@ -4,8 +4,8 @@ using DG.Tweening;
 public class ScaleWindow : MonoBehaviour
 {
     [SerializeField] private Transform _windowToTransform;
-    [SerializeField] private Vector3 _scaleTo;
-    [SerializeField] private float _scaleTime;
+    private Vector3 _scaleTo = new Vector3(1, 1, 1);
+    private float _scaleTime = 0.3f;
 
     [SerializeField] private GameObject _window;
 
