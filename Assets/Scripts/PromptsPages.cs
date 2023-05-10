@@ -4,16 +4,30 @@ using UnityEngine;
 
 public class PromptsPages : MonoBehaviour
 {
-    [SerializeField] private GameObject[] _prompts;
+    [SerializeField] private Transform parent;
     [SerializeField] private GameObject _default;
 
     private void OnEnable()
     {
+        DestroyAllCards();
+    }
+
+    private void OnDisable()
+    {
+        DestroyAllCards();
+    }
+
+    public void DestroyAllCards()
+    {
         _default.SetActive(true);
-        for (int i = 0; i < _prompts.Length; i++)
+        // for (int i = 0; i < _prompts.Length; i++)
+        // {
+        //     _prompts[i].SetActive(false);
+        //     _prompts[i].transform.localScale = new Vector3(0, 0, 0);
+        // }
+        foreach (Transform child in parent)
         {
-            _prompts[i].SetActive(false);
-            _prompts[i].transform.localScale = new Vector3(0, 0, 0);
+            Destroy(child.gameObject);
         }
     }
 }
