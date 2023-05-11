@@ -46,6 +46,11 @@ public class Card : MonoBehaviour
         Debug.Log("Delete: " + gameObject.name);
     }
 
+    public void ChangeColor()
+    {
+        
+    }
+
     private void OpenWindow()
     {
         _windowToTransform = GetComponent<Transform>();
