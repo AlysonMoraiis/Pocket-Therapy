@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using System.Collections;
 using TMPro;
 
 public class PlaceCardOnSlot : MonoBehaviour
@@ -9,8 +10,11 @@ public class PlaceCardOnSlot : MonoBehaviour
     [SerializeField] private GameObject _thisGameObject;
     [SerializeField] private Button _saveButton;
     [SerializeField] private Button _deleteButton;
+    [SerializeField] private PromptsPages _promptsPage;
 
-    private Card _teste;
+    [SerializeField] private GameObject _cardToSetInactive;
+
+    private Card _card;
 
     private void Start()
     {
@@ -21,7 +25,7 @@ public class PlaceCardOnSlot : MonoBehaviour
     public void InstantiateCardPrefab(GameObject cardPrefab)
     {
         GameObject newCardPrefab = Instantiate(cardPrefab, transform);
-        _teste = newCardPrefab.GetComponent<Card>();
+        _card = newCardPrefab.GetComponent<Card>();
         OpenWindow();
     }
 
@@ -32,11 +36,22 @@ public class PlaceCardOnSlot : MonoBehaviour
 
     private void HandleSaveButton()
     {
-        _teste.Save();
+        _card.Save();
+        StartCoroutine(TimerToDestroy());
     }
 
     public void HandleDeleteButton()
     {
-        _teste.Delete();
+        _card.Delete();
+        StartCoroutine(TimerToDestroy());
+    }
+
+    IEnumerator TimerToDestroy()
+    {
+        _card.CloseWindowCall();
+        _promptsPage.SetActive();
+        yield return new WaitForSeconds(0.31f);
+        _promptsPage.DestroyAllCards();
+        _cardToSetInactive.SetActive(false);
     }
 }

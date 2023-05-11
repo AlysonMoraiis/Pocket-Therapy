@@ -14,8 +14,6 @@ public class Card : MonoBehaviour
     {
         Load();
         OpenWindow();
-        // _saveButton.onClick.AddListener(Save);
-        // _deleteButton.onClick.AddListener(Delete);
     }
 
     public void Save()
@@ -44,7 +42,7 @@ public class Card : MonoBehaviour
         {
             PlayerPrefs.DeleteKey(gameObject.name + i);
         }
-        
+
         Debug.Log("Delete: " + gameObject.name);
     }
 
@@ -54,5 +52,16 @@ public class Card : MonoBehaviour
 
         transform.localScale = new Vector3(0, 0, 0);
         _windowToTransform.DOScale(new Vector3(1, 1, 1), 0.3f).SetUpdate(true);
+    }
+
+    public void CloseWindowCall()
+    {
+        _windowToTransform.DOScale(new Vector3(0, 0, 0), 0.3f).OnComplete(CloseWindow).SetUpdate(true);
+    }
+
+    private void CloseWindow()
+    {
+        GameObject windowToClose = GetComponent<GameObject>();
+        windowToClose.SetActive(false);
     }
 }

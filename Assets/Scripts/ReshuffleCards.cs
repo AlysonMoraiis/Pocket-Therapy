@@ -52,9 +52,9 @@ public class ReshuffleCards : MonoBehaviour
             randomObject.SetActive(true);
         }
 
-        foreach(GameObject obj in _chooseCardButton)
+        foreach (GameObject obj in _chooseCardButton)
         {
-            if(!randomIndexes.Contains(Array.IndexOf(_chooseCardButton, obj)))
+            if (!randomIndexes.Contains(Array.IndexOf(_chooseCardButton, obj)))
             {
                 obj.SetActive(false);
             }
