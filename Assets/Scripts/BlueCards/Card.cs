@@ -46,9 +46,12 @@ public class Card : MonoBehaviour
         Debug.Log("Delete: " + gameObject.name);
     }
 
-    public void ChangeColor()
+    public void ChangeColor(Color color)
     {
-        
+        for (int i = 0; i < _inputField.Length; i++)
+        {
+            _inputField[i].textComponent.color = color;
+        }
     }
 
     private void OpenWindow()

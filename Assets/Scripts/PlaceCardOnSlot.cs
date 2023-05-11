@@ -11,8 +11,19 @@ public class PlaceCardOnSlot : MonoBehaviour
     [SerializeField] private Button _saveButton;
     [SerializeField] private Button _deleteButton;
     [SerializeField] private PromptsPages _promptsPage;
-
     [SerializeField] private GameObject _cardToSetInactive;
+
+    [Header("Colors Buttons")]
+    [SerializeField] private Button _brownButton;
+    [SerializeField] private Button _blueButton;
+    [SerializeField] private Button _greenButton;
+    [SerializeField] private Button _orangeButton;
+
+
+    private Color _brown = new Color(135 / 255f, 115 / 255f, 91 / 255f);
+    private Color _blue = new Color(162 / 255f, 203 / 255f, 196 / 255f);
+    private Color _green = new Color(132 / 255f, 161 / 255f, 114 / 255f);
+    private Color _orange = new Color(245 / 255f, 120 / 255f, 80 / 255f);
 
     private Card _card;
 
@@ -20,6 +31,11 @@ public class PlaceCardOnSlot : MonoBehaviour
     {
         _saveButton.onClick.AddListener(HandleSaveButton);
         _deleteButton.onClick.AddListener(HandleDeleteButton);
+
+        _brownButton.onClick.AddListener(() => HandleChangeColorsButton(_brown));
+        _blueButton.onClick.AddListener(() => HandleChangeColorsButton(_blue));
+        _greenButton.onClick.AddListener(() => HandleChangeColorsButton(_green));
+        _orangeButton.onClick.AddListener(() => HandleChangeColorsButton(_orange));
     }
 
     public void InstantiateCardPrefab(GameObject cardPrefab)
@@ -44,6 +60,11 @@ public class PlaceCardOnSlot : MonoBehaviour
     {
         _card.Delete();
         StartCoroutine(TimerToDestroy());
+    }
+
+    public void HandleChangeColorsButton(Color color)
+    {
+        _card.ChangeColor(color);
     }
 
     IEnumerator TimerToDestroy()
